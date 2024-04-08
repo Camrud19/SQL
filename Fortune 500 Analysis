@@ -60,32 +60,34 @@ VALUES
 
 --Analysis:
 
---Which company has over 20 days of paid time off days?
+--Which company is the most popular to work for?
 SELECT
-company_name,
+company_name, industry,
 CASE
-	WHEN paid_time_off_days >=20 THEN 'good'
-    WHEN paid_time_off_days <20 THEN 'bad'
-    ELSE 'NO!'
-END as 'PTO'
+	WHEN employees >=10000 THEN 'popular'
+	WHEN employees <5000 THEN 'unpopular'
+	ELSE 'more liked'
+END as 'favorness'
 FROM fortune_companies
 WHERE employees
 ;
---Which industries have an average of at least $200 billion?
-SELECT industry, ROUND(AVG(revenue),1) as avg_revenue_billions
+
+--Which company has the most employee turnover?
+SELECT company_name, MAX(avg_employee_tenure) AS most_turnovers
 FROM fortune_companies
 GROUP BY industry
-HAVING avg_revenue_billions>=200
+HAVING MAX(avg_employee_tenure) >5
 ;
 
---Which companies offers health benefits and maternity leave?
+--Which company provide healthcare benefits *and* at least 8 weeks of maternity leave?
 SELECT company_name
 FROM fortune_companies
-WHERE maternity_leave_weeks
-AND healthcare_benefits=1
+WHERE healthcare_benefits=1
+AND maternity_leave_weeks>8
 ;
---Which company in the Retail industry have the most paid time off?
-SELECT company_name, MAX(paid_time_off_days)
+
+--How many employees work for the Healthcare industry?
+SELECT SUM(employees), industry
 FROM fortune_companies
-WHERE industry='Retail'
+WHERE industry='Healthcare'
 ;
