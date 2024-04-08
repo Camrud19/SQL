@@ -85,7 +85,7 @@ WHERE maternity_leave_weeks
 AND healthcare_benefits=1
 ;
 --Which company in the Retail industry have the most paid time off?
-SELECT company_name, SUM(paid_time_off_days)
+SELECT company_name, MAX(paid_time_off_days)
 FROM fortune_companies
 WHERE industry='Retail'
 ;
