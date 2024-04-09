@@ -86,7 +86,7 @@ WHERE healthcare_benefits=1
 AND maternity_leave_weeks>8
 ;
 
---How many employees work for the Healthcare industry?
+--How many employees work in the Healthcare industry?
 SELECT SUM(employees), industry
 FROM fortune_companies
 WHERE industry='Healthcare'
