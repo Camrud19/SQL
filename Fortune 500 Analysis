@@ -60,7 +60,7 @@ VALUES
 
 --Analysis:
 
---Which company is the most popular to work for?
+#1. Which company is the most popular to work for?
 SELECT
 company_name, industry,
 CASE
@@ -72,21 +72,21 @@ FROM fortune_companies
 WHERE employees
 ;
 
---Which company has the most employee turnover?
+#2. Which company has the most employee turnover?
 SELECT company_name, MAX(avg_employee_tenure) AS most_turnovers
 FROM fortune_companies
 GROUP BY industry
 HAVING MAX(avg_employee_tenure) >5
 ;
 
---Which company provide healthcare benefits *and* at least 8 weeks of maternity leave?
+#3. Which company provide healthcare benefits *and* at least 8 weeks of maternity leave?
 SELECT company_name
 FROM fortune_companies
 WHERE healthcare_benefits=1
 AND maternity_leave_weeks>8
 ;
 
---How many employees work in the Healthcare industry?
+#4. How many employees work in the Healthcare industry?
 SELECT SUM(employees), industry
 FROM fortune_companies
 WHERE industry='Healthcare'
